@@ -2,7 +2,8 @@
     "name": "jahvi/new-order-notification",
     "description": "Display a notification in real time when a new order is created.",
     "require": {
-        "php": "~5.5.0|~5.6.0|~7.0.0"
+        "php": "~5.5.0|~5.6.0|~7.0.0",
+        "magento/framework": "100.0.*"
     },
     "type": "magento2-module",
     "version": "1.0.0",
