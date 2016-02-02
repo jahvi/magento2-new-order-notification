@@ -1,0 +1,33 @@
+<?xml version="1.0"?>
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:module:Magento_Config:etc/system_file.xsd">
+    <system>
+        <section id="checkout">
+            <group id="newordernotification" translate="label" sortOrder="4" showInDefault="1" showInWebsite="1" showInStore="0">
+                <label>New Order Notification</label>
+                <group id="newordernotification_required" translate="label" showInDefault="1" showInWebsite="1" showInStore="0" sortOrder="1">
+                    <label>Pusher App Credentials</label>
+                    <comment><![CDATA[Remember to sign up for a <a href="https://dashboard.pusher.com/accounts/sign_up" target="_blank">FREE Pusher account</a> to get your app credentials.]]></comment>
+                    <attribute type="expanded">1</attribute>
+                    <field id="app_id" translate="label" type="text" sortOrder="1" showInDefault="1" showInWebsite="1" showInStore="0">
+                        <label>App ID</label>
+                    </field>
+                    <field id="app_key" translate="label" type="text" sortOrder="2" showInDefault="1" showInWebsite="1" showInStore="0">
+                        <label>App Key</label>
+                    </field>
+                    <field id="app_secret" translate="label" type="obscure" sortOrder="3" showInDefault="1" showInWebsite="1" showInStore="0">
+                        <label>App Secret</label>
+                        <backend_model>Magento\Config\Model\Config\Backend\Encrypted</backend_model>
+                    </field>
+                </group>
+                <field id="enabled" translate="label" type="select" sortOrder="4" showInDefault="1" showInWebsite="1" showInStore="0">
+                    <label>Enable New Order Notifications</label>
+                    <config_path>checkout/newordernotification/enabled</config_path>
+                    <source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
+                    <requires>
+                        <group id="newordernotification_required"/>
+                    </requires>
+                </field>
+            </group>
+        </section>
+    </system>
+</config>
