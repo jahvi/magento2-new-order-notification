@@ -10,12 +10,15 @@
                     <attribute type="expanded">1</attribute>
                     <field id="app_id" translate="label" type="text" sortOrder="1" showInDefault="1" showInWebsite="1" showInStore="0">
                         <label>App ID</label>
+                        <config_path>checkout/newordernotification/app_id</config_path>
                     </field>
                     <field id="app_key" translate="label" type="text" sortOrder="2" showInDefault="1" showInWebsite="1" showInStore="0">
                         <label>App Key</label>
+                        <config_path>checkout/newordernotification/app_key</config_path>
                     </field>
                     <field id="app_secret" translate="label" type="obscure" sortOrder="3" showInDefault="1" showInWebsite="1" showInStore="0">
                         <label>App Secret</label>
+                        <config_path>checkout/newordernotification/app_secret</config_path>
                         <backend_model>Magento\Config\Model\Config\Backend\Encrypted</backend_model>
                     </field>
                 </group>

@@ -10,6 +10,7 @@
         <checkout>
             <newordernotification>
                 <enabled>0</enabled>
+                <app_secret backend_model="Magento\Config\Model\Config\Backend\Encrypted" />
             </newordernotification>
         </checkout>
     </default>
