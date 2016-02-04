@@ -1,9 +1,23 @@
 define([
+    'jquery',
     'pusherjs',
-], function (Pusher) {
+    'jquery/ui',
+], function ($, Pusher) {
     'use strict';
 
-    console.log('test');
+    $.widget('jahvi.newOrderNotification', {
+        _create: function () {
+            var pusher = new Pusher(this.options.appKey, {
+                encrypted: true
+            });
 
-    return true;
+            var channel = pusher.subscribe('non_channel');
+
+            channel.bind('new_order', function (data) {
+                console.log(data);
+            });
+        }
+    });
+
+    return $.jahvi.newOrderNotification;
 });
