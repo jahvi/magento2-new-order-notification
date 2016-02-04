@@ -1,7 +1,7 @@
 <?php
 /** @var \Jahvi\NewOrderNotification\Block\Datajs $block */
 $arrayData = [
-    'app_key' => $block->getAppKey(),
+    'appKey' => $block->getAppKey(),
 ];
 $serializedData = $this->helper('Magento\Framework\Json\Helper\Data')->jsonEncode($arrayData);
 ?>
