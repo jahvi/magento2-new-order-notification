@@ -9,28 +9,16 @@ class Datajs extends \Magento\Framework\View\Element\Template
 
     public function getAppId()
     {
-        return $this->_scopeConfig->getValue(
-            self::PUSHER_APP_ID,
-            \Magento\Store\Model\ScopeInterface::SCOPE_STORE,
-            null
-        );
+        return $this->_scopeConfig->getValue(self::PUSHER_APP_ID);
     }
 
     public function getAppKey()
     {
-        return $this->_scopeConfig->getValue(
-            self::PUSHER_APP_KEY,
-            \Magento\Store\Model\ScopeInterface::SCOPE_STORE,
-            null
-        );
+        return $this->_scopeConfig->getValue(self::PUSHER_APP_KEY);
     }
 
     public function getAppSecret()
     {
-        return $this->_scopeConfig->getValue(
-            self::PUSHER_APP_SECRET,
-            \Magento\Store\Model\ScopeInterface::SCOPE_STORE,
-            null
-        );
+        return $this->_scopeConfig->getValue(self::PUSHER_APP_SECRET);
     }
 }
