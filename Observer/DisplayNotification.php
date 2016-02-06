@@ -56,7 +56,7 @@ class DisplayNotification implements ObserverInterface
 
             $orderId = $observer->getEvent()->getOrderIds()[0];
 
-            $order = $this->orderFactory->create()->load(5);
+            $order = $this->orderFactory->create()->load($orderId);
 
             $product      = $order->getAllVisibleItems()[0]->getProduct();
             $shippingCity = $order->getShippingAddress()->getCity();

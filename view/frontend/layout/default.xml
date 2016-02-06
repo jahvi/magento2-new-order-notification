@@ -1,5 +1,9 @@
 <?xml version="1.0"?>
 <page xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:framework:View/Layout/etc/page_configuration.xsd">
+    <head>
+        <css src="Jahvi_NewOrderNotification::css/ns-default.css"/>
+        <css src="Jahvi_NewOrderNotification::css/ns-style-other.css"/>
+    </head>
     <body>
         <referenceContainer name="content">
             <block class="Jahvi\NewOrderNotification\Block\Datajs" name="new_order_notification_datajs" template="Jahvi_NewOrderNotification::data_js.phtml"/>
