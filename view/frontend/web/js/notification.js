@@ -1,3 +1,4 @@
+/* global define, NotificationFx */
 define([
     'jquery',
     'pusherjs',

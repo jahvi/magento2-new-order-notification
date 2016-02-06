@@ -1,5 +1,9 @@
 <?php
-
+/**
+ * Display notification event listener
+ *
+ * @author Javier Villanueva <javiervd@gmail.com>
+ */
 namespace Jahvi\NewOrderNotification\Observer;
 
 use Magento\Catalog\Helper\Image;
@@ -12,8 +16,6 @@ use Magento\Framework\App\Config\ScopeConfigInterface;
 class DisplayNotification implements ObserverInterface
 {
     /**
-     * Global configuration storage.
-     *
      * @var \Magento\Framework\App\Config\ScopeConfigInterface
      */
     protected $globalConfig;
@@ -33,6 +35,14 @@ class DisplayNotification implements ObserverInterface
      */
     protected $imageHelper;
 
+    /**
+     * Setup initial dependencies
+     *
+     * @param \Magento\Framework\App\Config\ScopeConfigInterface $globalConfig
+     * @param \Magento\Sales\Model\OrderFactory                  $orderFactory
+     * @param \Magento\Directory\Model\CountryFactory            $countryFactory
+     * @param \Magento\Catalog\Helper\Image                      $imageHelper
+     */
     public function __construct(
         ScopeConfigInterface $globalConfig,
         OrderFactory $orderFactory,
@@ -45,6 +55,12 @@ class DisplayNotification implements ObserverInterface
         $this->imageHelper    = $imageHelper;
     }
 
+    /**
+     * Trigger pusher event with latest order information
+     *
+     * @param  \Magento\Framework\Event\Observer $observer
+     * @return \Jahvi\NewOrderNotification\Observer\DisplayNotification
+     */
     public function execute(Observer $observer)
     {
         if ($this->globalConfig->getValue('checkout/newordernotification/enabled')) {
@@ -52,19 +68,23 @@ class DisplayNotification implements ObserverInterface
             $appKey    = $this->globalConfig->getValue('checkout/newordernotification/app_key');
             $appSecret = $this->globalConfig->getValue('checkout/newordernotification/app_secret');
 
-            $pusher = new \Pusher($appKey, $appSecret, $appId, ['encrypted' => true, 'debug' => true]);
+            $pusher = new \Pusher($appKey, $appSecret, $appId, ['encrypted' => true]);
 
+            // Get latest order
             $orderId = $observer->getEvent()->getOrderIds()[0];
 
             $order = $this->orderFactory->create()->load($orderId);
 
+            // Get last product in order data
             $product      = $order->getAllVisibleItems()[0]->getProduct();
             $shippingCity = $order->getShippingAddress()->getCity();
             $productImage = $this->imageHelper->init($product, 'product_thumbnail_image');
 
+            // Get shipping city and country
             $shippingCountryCode = $order->getShippingAddress()->getCountryId();
             $shippingCountry     = $this->countryFactory->create()->loadByCode($shippingCountryCode);
 
+            // Trigger pusher event with collected data
             $pusher->trigger(
                 'non_channel',
                 'new_order',
