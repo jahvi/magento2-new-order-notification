@@ -10,7 +10,6 @@
     pointer-events: none;
     color: rgba(250,251,255,0.95);
     font-size: 90%;
-    font-family: 'Helvetica Neue', 'Segoe UI', Helvetica, Arial, sans-serif;
 }
 
 .ns-box.ns-show {
@@ -18,14 +17,7 @@
 }
 
 .ns-box a {
-    color: inherit;
-    opacity: 0.7;
     font-weight: 700;
-}
-
-.ns-box a:hover,
-.ns-box a:focus {
-    opacity: 1;
 }
 
 .ns-box p {

@@ -2,7 +2,7 @@ define([
     'jquery',
     'pusherjs',
     'notificationFx',
-    'jquery/ui',
+    'jquery/ui'
 ], function ($, Pusher) {
     'use strict';
 
