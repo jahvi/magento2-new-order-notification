@@ -5,7 +5,7 @@ latest product in the order and the location that the items were shipped to.
 
 ![Sample Notification](http://i.imgur.com/DNvtVuP.gif)
 
-You will need to created a [FREE Pusher account](https://dashboard.pusher.com/accounts/sign_up) to be able to use this extension.
+You will need to create a [FREE Pusher account](https://dashboard.pusher.com/accounts/sign_up) to be able to use this extension.
 
 ### Installation instructions
 
