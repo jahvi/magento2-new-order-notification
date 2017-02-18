@@ -1,6 +1,6 @@
 {
     "name": "jahvi/new-order-notification",
-    "description": "Display a notification in real time when a new order is created in Magento 2",
+    "description": "Display a notification in real time when a new order is placed in Magento 2",
     "authors": [
         {
             "name": "Javier Villanueva",
