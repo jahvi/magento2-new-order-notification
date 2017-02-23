@@ -18,22 +18,22 @@ class DisplayNotification implements ObserverInterface
     /**
      * @var \Magento\Framework\App\Config\ScopeConfigInterface
      */
-    protected $globalConfig;
+    private $globalConfig;
 
     /**
      * @var \Magento\Sales\Model\OrderFactory
      */
-    protected $orderFactory;
+    private $orderFactory;
 
     /**
      * @var \Magento\Directory\Model\CountryFactory
      */
-    protected $countryFactory;
+    private $countryFactory;
 
     /**
      * @var \Magento\Catalog\Helper\Image
      */
-    protected $imageHelper;
+    private $imageHelper;
 
     /**
      * Setup initial dependencies
