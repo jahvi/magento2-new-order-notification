@@ -8,7 +8,7 @@
  * Copyright 2014, Codrops
  * http://www.codrops.com
  */
-;( function( window, $ ) {
+;( function ( window, $ ) {
 
     'use strict';
 
@@ -21,14 +21,15 @@
             'animation' : 'animationend'
         },
         // animation end event name
-        animEndEventName = animEndEventNames[ Modernizr.prefixed( 'animation' ) ];
+        animEndEventName = animEndEventNames[ Modernizr.prefixed('animation') ];
 
     /**
      * extend obj function
      */
-    function extend( a, b ) {
-        for( var key in b ) {
-            if( b.hasOwnProperty( key ) ) {
+    function extend( a, b )
+    {
+        for (var key in b) {
+            if (b.hasOwnProperty(key) ) {
                 a[key] = b[key];
             }
         }
@@ -38,9 +39,10 @@
     /**
      * NotificationFx function
      */
-    function NotificationFx( options ) {
-        this.options = extend( {}, this.options );
-        extend( this.options, options );
+    function NotificationFx( options )
+    {
+        this.options = extend({}, this.options);
+        extend(this.options, options);
         this._init();
     }
 
@@ -68,17 +70,19 @@
         // after the following time
         ttl : 6000,
         // callbacks
-        onClose : function() { return false; },
-        onOpen : function() { return false; }
+        onClose : function () {
+ return false; },
+        onOpen : function () {
+ return false; }
     }
 
     /**
      * init function
      * initialize and cache some vars
      */
-    NotificationFx.prototype._init = function() {
+    NotificationFx.prototype._init = function () {
         // create HTML structure
-        this.ntf = document.createElement( 'div' );
+        this.ntf = document.createElement('div');
         this.ntf.className = 'ns-box ns-' + this.options.layout + ' ns-effect-' + this.options.effect + ' ns-type-' + this.options.type;
         var strinner = '<div class="ns-box-inner">';
         strinner += this.options.message;
@@ -87,17 +91,17 @@
         this.ntf.innerHTML = strinner;
 
         // append to body or the element specified in options.wrapper
-        this.options.wrapper.insertBefore( this.ntf, this.options.wrapper.firstChild );
+        this.options.wrapper.insertBefore(this.ntf, this.options.wrapper.firstChild);
 
         // dismiss after [options.ttl]ms
         var self = this;
 
-        if(this.options.ttl) { // checks to make sure ttl is not set to false in notification initialization
-            this.dismissttl = setTimeout( function() {
-                if( self.active ) {
+        if (this.options.ttl) { // checks to make sure ttl is not set to false in notification initialization
+            this.dismissttl = setTimeout(function () {
+                if (self.active ) {
                     self.dismiss();
                 }
-            }, this.options.ttl );
+            }, this.options.ttl);
         }
 
         // init events
@@ -107,52 +111,53 @@
     /**
      * init events
      */
-    NotificationFx.prototype._initEvents = function() {
+    NotificationFx.prototype._initEvents = function () {
         var self = this;
         // dismiss notification
-        this.ntf.querySelector( '.ns-close' ).addEventListener( 'click', function() { self.dismiss(); } );
+        this.ntf.querySelector('.ns-close').addEventListener('click', function () {
+ self.dismiss(); });
     }
 
     /**
      * show the notification
      */
-    NotificationFx.prototype.show = function() {
+    NotificationFx.prototype.show = function () {
         this.active = true;
-        $( this.ntf ).removeClass( 'ns-hide' );
-        $( this.ntf ).addClass( 'ns-show' );
-        if (typeof this.options.onOpen === 'function')
-            this.options.onOpen();
+        $(this.ntf).removeClass('ns-hide');
+        $(this.ntf).addClass('ns-show');
+        if (typeof this.options.onOpen === 'function') {
+            this.options.onOpen(); }
     }
 
     /**
      * dismiss the notification
      */
-    NotificationFx.prototype.dismiss = function() {
+    NotificationFx.prototype.dismiss = function () {
         var self = this;
         this.active = false;
-        clearTimeout( this.dismissttl );
-        $( this.ntf ).removeClass( 'ns-show' );
-        setTimeout( function() {
-            $( self.ntf ).addClass( 'ns-hide' );
+        clearTimeout(this.dismissttl);
+        $(this.ntf).removeClass('ns-show');
+        setTimeout(function () {
+            $(self.ntf).addClass('ns-hide');
 
             // callback
-            if (typeof self.options.onClose === 'function')
-                self.options.onClose();
-        }, 25 );
+            if (typeof self.options.onClose === 'function') {
+                self.options.onClose(); }
+        }, 25);
 
         // after animation ends remove ntf from the DOM
-        var onEndAnimationFn = function( ev ) {
-            if( support.animations ) {
-                if( ev.target !== self.ntf ) return false;
-                this.removeEventListener( animEndEventName, onEndAnimationFn );
+        var onEndAnimationFn = function ( ev ) {
+            if (support.animations ) {
+                if (ev.target !== self.ntf ) {
+return false; }
+                this.removeEventListener(animEndEventName, onEndAnimationFn);
             }
-            self.options.wrapper.removeChild( this );
+            self.options.wrapper.removeChild(this);
         };
 
-        if( support.animations ) {
-            this.ntf.addEventListener( animEndEventName, onEndAnimationFn );
-        }
-        else {
+        if (support.animations ) {
+            this.ntf.addEventListener(animEndEventName, onEndAnimationFn);
+        } else {
             onEndAnimationFn();
         }
     }
