@@ -1,0 +1,89 @@
+//
+//  Animation effects
+//  _____________________________________________
+
+@import 'module/_effects.less';
+
+//
+//  Common
+//  _____________________________________________
+
+& when (@media-common = true) {
+
+    //
+    //  Default styles for the notification box
+    //  ---------------------------------------------
+
+    .ns-box {
+        position: fixed;
+        bottom: 0;
+        background: rgba(42, 45, 50, 0.85);
+        padding: 22px;
+        line-height: 1.4;
+        z-index: 1000;
+        pointer-events: none;
+        color: rgba(250, 251, 255, 0.95);
+        font-size: 90%;
+
+        &.ns-show {
+            pointer-events: auto;
+        }
+
+        a {
+            font-weight: 700;
+        }
+
+        p {
+            margin: 0;
+        }
+
+        &.ns-show,
+        &.ns-visible {
+            pointer-events: auto;
+        }
+    }
+
+    .ns-close {
+        width: 20px;
+        height: 20px;
+        position: absolute;
+        right: 4px;
+        top: 4px;
+        overflow: hidden;
+        text-indent: 100%;
+        cursor: pointer;
+        -webkit-backface-visibility: hidden;
+        backface-visibility: hidden;
+
+        &:hover,
+        &:focus {
+            outline: none;
+        }
+
+        &::before,
+        &::after {
+            content: '';
+            position: absolute;
+            width: 3px;
+            height: 60%;
+            top: 50%;
+            left: 50%;
+            background: #6e6e6e;
+        }
+
+        &:hover::before,
+        &:hover::after {
+            background: #fff;
+        }
+
+        &::before {
+            -webkit-transform: translate(-50%, -50%) rotate(45deg);
+            transform: translate(-50%, -50%) rotate(45deg);
+        }
+
+        &::after {
+            -webkit-transform: translate(-50%, -50%) rotate(-45deg);
+            transform: translate(-50%, -50%) rotate(-45deg);
+        }
+    }
+}
