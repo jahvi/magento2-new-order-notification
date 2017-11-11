@@ -63,40 +63,42 @@ class DisplayNotification implements ObserverInterface
      */
     public function execute(Observer $observer)
     {
-        if ($this->globalConfig->getValue('checkout/newordernotification/enabled')) {
-            $appId     = $this->globalConfig->getValue('checkout/newordernotification/app_id');
-            $appKey    = $this->globalConfig->getValue('checkout/newordernotification/app_key');
-            $appSecret = $this->globalConfig->getValue('checkout/newordernotification/app_secret');
-
-            $pusher = new \Pusher($appKey, $appSecret, $appId, ['encrypted' => true]);
-
-            // Get latest order
-            $orderId = $observer->getEvent()->getOrderIds()[0];
-
-            $order = $this->orderFactory->create()->load($orderId);
-
-            // Get last product in order data
-            $product      = $order->getAllVisibleItems()[0]->getProduct();
-            $shippingCity = $order->getShippingAddress()->getCity();
-            $productImage = $this->imageHelper->init($product, 'product_thumbnail_image');
-
-            // Get shipping city and country
-            $shippingCountryCode = $order->getShippingAddress()->getCountryId();
-            $shippingCountry     = $this->countryFactory->create()->loadByCode($shippingCountryCode);
-
-            // Trigger pusher event with collected data
-            $pusher->trigger(
-                'non_channel',
-                'new_order',
-                [
-                    'product_name'     => $product->getName(),
-                    'product_image'    => $productImage->getUrl(),
-                    'product_url'      => $product->getProductUrl(),
-                    'shipping_city'    => $shippingCity,
-                    'shipping_country' => $shippingCountry->getName(),
-                ]
-            );
+        if (!$this->globalConfig->getValue('checkout/newordernotification/enabled')) {
+            return $this;
         }
+
+        $appId     = $this->globalConfig->getValue('checkout/newordernotification/app_id');
+        $appKey    = $this->globalConfig->getValue('checkout/newordernotification/app_key');
+        $appSecret = $this->globalConfig->getValue('checkout/newordernotification/app_secret');
+
+        $pusher = new \Pusher($appKey, $appSecret, $appId, ['encrypted' => true]);
+
+        // Get latest order
+        $orderId = $observer->getEvent()->getOrderIds()[0];
+
+        $order = $this->orderFactory->create()->load($orderId);
+
+        // Get last product in order data
+        $product      = $order->getAllVisibleItems()[0]->getProduct();
+        $shippingCity = $order->getShippingAddress()->getCity();
+        $productImage = $this->imageHelper->init($product, 'product_thumbnail_image');
+
+        // Get shipping city and country
+        $shippingCountryCode = $order->getShippingAddress()->getCountryId();
+        $shippingCountry     = $this->countryFactory->create()->loadByCode($shippingCountryCode);
+
+        // Trigger pusher event with collected data
+        $pusher->trigger(
+            'non_channel',
+            'new_order',
+            [
+                'product_name'     => $product->getName(),
+                'product_image'    => $productImage->getUrl(),
+                'product_url'      => $product->getProductUrl(),
+                'shipping_city'    => $shippingCity,
+                'shipping_country' => $shippingCountry->getName(),
+            ]
+        );
 
         return $this;
     }
