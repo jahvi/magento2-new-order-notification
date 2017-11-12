@@ -1,7 +1,6 @@
 ## New Order Notification
 
-Display a real time notification on the frontend of your Magento 2 store when someone places an order. The notification contains the
-latest product in the order and the location that the items were shipped to.
+Display a real time notification on the frontend of your Magento 2 store when someone places an order. The notification contains the latest product in the order and the location that the items were shipped to.
 
 ![Sample Notification](http://i.imgur.com/DNvtVuP.gif)
 
