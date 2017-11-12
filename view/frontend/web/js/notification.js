@@ -22,7 +22,7 @@ define([
                 .replace('%2', '<a href="' + data.product_url + '">' + data.product_name + '</a>');
 
                 var notification = new NotificationFx({
-                    message: '<div class="ns-thumb"><img src="' + data.product_image + '"/></div><div class="ns-content"><p>' + message + '</p></div>',
+                    message: '<div class="ns-thumb"><img width="75" height="75" src="' + data.product_image + '"/></div><div class="ns-content"><p>' + message + '</p></div>',
                     layout: 'other',
                     ttl: 6000,
                     effect: 'thumbslider',
