@@ -21,6 +21,10 @@
                         <config_path>checkout/newordernotification/app_secret</config_path>
                         <backend_model>Magento\Config\Model\Config\Backend\Encrypted</backend_model>
                     </field>
+                    <field id="cluster" translate="label" type="text" sortOrder="4" showInDefault="1" showInWebsite="1" showInStore="0">
+                        <label>Cluster</label>
+                        <config_path>checkout/newordernotification/cluster</config_path>
+                    </field>
                 </group>
                 <field id="enabled" translate="label" type="select" sortOrder="4" showInDefault="1" showInWebsite="1" showInStore="0">
                     <label>Enable New Order Notifications</label>

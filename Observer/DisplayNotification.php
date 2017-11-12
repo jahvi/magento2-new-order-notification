@@ -70,8 +70,9 @@ class DisplayNotification implements ObserverInterface
         $appId     = $this->globalConfig->getValue('checkout/newordernotification/app_id');
         $appKey    = $this->globalConfig->getValue('checkout/newordernotification/app_key');
         $appSecret = $this->globalConfig->getValue('checkout/newordernotification/app_secret');
+        $cluster = $this->globalConfig->getValue('checkout/newordernotification/cluster');
 
-        $pusher = new \Pusher($appKey, $appSecret, $appId, ['encrypted' => true]);
+        $pusher = new \Pusher\Pusher($appKey, $appSecret, $appId, ['encrypted' => true, 'cluster' => $cluster]);
 
         // Get latest order
         $orderId = $observer->getEvent()->getOrderIds()[0];
