@@ -6,7 +6,6 @@
  */
 namespace Jahvi\NewOrderNotification\Observer;
 
-use Pusher\PusherFactory;
 use Magento\Catalog\Helper\Image;
 use Magento\Sales\Model\OrderFactory;
 use Magento\Framework\Event\Observer;
@@ -37,11 +36,6 @@ class DisplayNotification implements ObserverInterface
     private $imageHelper;
 
     /**
-     * @var \Pusher\PusherFactory
-     */
-    private $pusherFactory;
-
-    /**
      * Setup initial dependencies
      *
      * @param \Magento\Framework\App\Config\ScopeConfigInterface $globalConfig
@@ -54,14 +48,12 @@ class DisplayNotification implements ObserverInterface
         ScopeConfigInterface $globalConfig,
         OrderFactory $orderFactory,
         CountryFactory $countryFactory,
-        Image $imageHelper,
-        PusherFactory $pusherFactory
+        Image $imageHelper
     ) {
         $this->globalConfig = $globalConfig;
         $this->orderFactory = $orderFactory;
         $this->countryFactory = $countryFactory;
         $this->imageHelper = $imageHelper;
-        $this->pusherFactory = $pusherFactory;
     }
 
     /**
@@ -81,12 +73,12 @@ class DisplayNotification implements ObserverInterface
         $appSecret = $this->globalConfig->getValue('checkout/newordernotification/app_secret');
         $cluster = $this->globalConfig->getValue('checkout/newordernotification/cluster');
 
-        $pusher = $this->pusherFactory->create([
-            'auth_key' => $appKey,
-            'secret' => $appSecret,
-            'app_id' => $appId,
-            'options' => ['encrypted' => true, 'cluster' => $cluster]
-        ]);
+        $pusher = new \Pusher\Pusher(
+            $appKey,
+            $appSecret,
+            $appId,
+            ['encrypted' => true, 'cluster' => $cluster]
+        );
 
         // Get latest order
         $orderId = $observer->getEvent()->getOrderIds()[0];
